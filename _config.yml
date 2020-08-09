@@ -85,7 +85,7 @@ analytics:
 # Site Author
 author:
   name             : "Dariia Dziuba"
-  avatar           : "/images/bio-pic-2.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/images/dariia_dziuba.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Data Science Portfolio"
   location         : "Montreal, Canada"
   email            :
