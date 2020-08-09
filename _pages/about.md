@@ -5,6 +5,4 @@ header:
   image: "/images/zakim.jpg"
 ---
 
-I'm a senior data scientist who excels at data wrangling, machine learning, exploratory analysis, and data visualizations.
-
-Etc, etc, etc
+“I’m an apsiring data scientist, experienced with SAS, R and SQL programming. I specialize in big data analysis, data visualization and business forecasting. Data is beautiful!  
