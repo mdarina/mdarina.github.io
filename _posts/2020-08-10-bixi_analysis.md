@@ -75,7 +75,7 @@ I am only going to focus on the variables I actually used for the analysis:
 
 - Date/Time
 
-- Mean temperature (Mean Temp (C$^\circ$))
+- Mean temperature (Mean Temp (C°))
 
 - Total precipitation (Total Precip (mm))
 
