@@ -11,7 +11,7 @@ output:
 
 
 <center>
-  <img src="images/bixi.jpg" />
+  <img src="/images/bixi.jpg" >
 </center>
 
 ### **Why Bixi?**
