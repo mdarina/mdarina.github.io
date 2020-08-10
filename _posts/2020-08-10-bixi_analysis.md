@@ -187,9 +187,7 @@ ggplot(members_tot_rev, aes(category, revenues, fill=category))+
         panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
         panel.grid.minor=element_blank(),plot.background=element_blank())
 ```
-
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
-
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-7-1.png" >
 
 
 ### **Who goes on longer rides?**
@@ -213,13 +211,13 @@ ggplot(mean, aes(member, mean, group=1))+
         panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
         panel.grid.minor=element_blank(),plot.background=element_blank())
 ```
-
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-8-1.png" >
 
 
 ### **Do member and non-member riders prefer different hours?**
 From this graph we may tell that it seems non-members ride mostly in the afternoon, while members ride in the morning and in the late afternoon. It may be reflective of different goals that members and non-members pursue using BIXIs. Say, members are highly likely to use BIXIs for commuting to work or school. Non-members may be tourists or occasional riders who may use BIXIs for sightseeing or some other purposes. The graphs located further will visually show that difference.
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-9-1.png" >
+
 
 Plotting the member data only and highlighting the peak hours, we can visually see that 8 am and 4-6 pm are the peak hours for member trips. These hours magically coincide with peak hours when people commute to and from work/school.
 
@@ -235,8 +233,8 @@ ggplot(member_hours, aes(Hour, Rides/1000, fill=Peak_Hour))+
   ylab("Rides, '000")+
   theme(legend.position="top")
 ```
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-11-1.png" >
 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 As we can see for non-members early rides are not typical. However, they happily use BIXIs from 1 to 6 pm. What it means for the company? It means that it has to make sure that its mostly loaded time is between 4-6 when member peak hours overlap with non-member peak hours. That is the time when they have to work against the clock in order to make their bikes available to those who would like to take a ride around the city.
 
@@ -253,16 +251,15 @@ ggplot(nonmember_hours, aes(Hour, Rides/1000, fill=Peak_Hour))+
   theme(legend.position="top")
 ```
 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-13-1.png" >
 
 
 ### **Do member and non-member riders prefer different days?**
 Again, to confirm the "commute theory", we can see that members prefer using BIXIs on working days with Wednesday being the most popular day.
-
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-14-1.png" >
 
 Non-members, on the contrary love riding BIXIs on the weekend with Sunday being the most popular day. Partially, it can be caused by their "free Sundays" propositions when on a random Sunday they make all BIXIs free. It definitely stimulates non-member rides inducing them either to try BIXIs for the first time or go on a regular ride.
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-15-1.png" >
 
 
 ### **Which months do people ride most?**
@@ -281,11 +278,11 @@ ggplot(month_member, aes(x = Bixi_Months, y=Rides/1000, fill=Peak_Months)) +
   xlab(" ")+
   ylab("Rides, '000")
 ```
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-16-1.png" >
 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-17-1.png" >
 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 
 ### **How does the weather impact rides?**
@@ -302,8 +299,8 @@ ggplot(weather_allr, aes(x=Mean_temp, y=Rides))+
   geom_point(colour="steelblue4", alpha=0.5, size=3)+
   geom_smooth(method=lm, colour="black", se=FALSE)
 ```
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-19-1.png" >
 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
 
 
 ##### **How does precipitation impact rides?**
@@ -320,7 +317,7 @@ ggplot(weather_allr, aes(x=Mean_temp,
   ggtitle("Rides vs Mean Temperature and Precipitation (2014-2019)")
 ```
 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-20-1.png" >
 
 
 ### **What are the most popular routes chosen by members and non-members?**
@@ -361,11 +358,12 @@ ggplot()+geom_polygon(data=dfSHP, aes(x=long,y=lat,
         panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
         panel.grid.minor=element_blank(),plot.background=element_blank())
 ```
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-22-1.png" >
 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
 
 As for the non-member rides, their top ten routes are pretty short and lie mostly in the Old Port, Jean Drapeau and Atwater areas. This partially confirms the idea that BIXIs are used by tourists given that those places are common tourist destinations in Montreal. 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-23-1.png" >
+
 
 ### Some extra thoughts
 Of course, I did not have a complete data that BIXI has. For example, when I was calculating the most popular routes, I only took the start and end points of one ride. However, when a person rides around Montreal, their journey can include multiple stops at multiple stations. Having a user ID would have been useful to track their individual journey. However, for privacy protection, it is a good idea, of course, not to make this sensitive data public.
@@ -422,7 +420,7 @@ In this section I have included some extra plots that were not useful for the re
 
 
 ##### **How does precipitation impact rides?**
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-26-1.png" >
 
 
 ##### **How are wet days correlated with the number of rides?**
@@ -440,11 +438,12 @@ ggplot(subset(weather_allr, wet=="Wet"), aes(x=Mean_temp,
   theme(legend.position = "none")
 ```
 
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-27-1.png" >
+
 
 
 ##### **How are dry days correlated with the number of rides?**
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
+  <img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-28-1.png" >
 
 
 
