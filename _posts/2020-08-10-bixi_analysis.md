@@ -1,6 +1,6 @@
 
 ---
-"Analyzing Bixi Data: 2014-2019"
+Analyzing Bixi Data: 2014-2019
 ---
 
 
