@@ -11,7 +11,7 @@ output:
 
 
 <center>
-![](images/bixi.jpg)
+![](/images/bixi.jpg)
 </center>
 
 ### **Why Bixi?**
