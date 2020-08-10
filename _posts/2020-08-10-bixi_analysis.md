@@ -1,3 +1,4 @@
+
 ---
 title: "Analyzing Bixi Data"
 author: "Dariia Dziuba"
@@ -160,8 +161,7 @@ ggplot(mem_df, aes(category, total, fill=category))+
         panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
         panel.grid.minor=element_blank(),plot.background=element_blank())
 ```
-
-![](2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+<img src="/2020-08-10-bixi_analysis_files/figure-html/unnamed-chunk-6-1.png" >
 
 
 ### **Who brings most revenues: members or occasional riders?**
