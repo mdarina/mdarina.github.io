@@ -19,68 +19,45 @@ My goal was to discover some patterns in Bixi riders' behaviour, related to thei
 
 ### **Questions Asked**
 1. Do members or non-members drive BIXI sales?
-
 2. Who brings most revenues: members or occasional riders?
-
 3. Who goes on longer rides?
-
 4. Do member and non-member riders prefer different hours?
-
 5. Do member and non-member riders prefer different days?
-
 6. Which months do people ride most?
-
 7. How does the weather impact rides?
-
 8. What are the most popular routes chosen by members and non-members?
 
 
 ### **Data Used for Analysis**
 Luckily, there is a plenty of open data avialble online. So, I was not only able to get access to BIXI's data, but also find a map of Montreal to plot riders' routes and get historical weather data for the years of interest! You can get the data I used here:
-
 1. [Bixi open data (2014-2019)](https://www.bixi.com/en/open-data) with pass purchases (1 table), rides (47 tables), stations (6 tables)
-
 2. Environment Canada's [historical weather data](https://weather.gc.ca/canada_e.html) from YUL airport collected on a daily basis (6 tables)
-
 3. City of Montreal's spacial data: [Shapefile of Montreal](http://donnees.ville.montreal.qc.ca/dataset/polygones-arrondissements)  
 
 ### **What variables did I use for analysis?**
 I am only going to focus on the variables I actually used for the analysis:
 
 ##### **Bixi rides (2014-2019):**
-
 - Start (start_date) and end (end_date) timestamps of the ride
-
 - Duration in seconds (duration_sec)
-
 - Start (start_station_code) and end (end_station_code) station codes (used as ids to merge with the stations sets)
-
 - Membership (is_member)
 
 ##### **Bixi stations (2014-2019):**
-
 - Station code (code)
-
 - Station name (name)
-
 - Latitude and longitude
 
 ##### **Pass Purchases**
-
 - Date
-
 - Member and Non-member pass purchases
 
 ##### **Weather data (2014-2019)**
-
 - Date/Time
-
 - Mean temperature (Mean Temp (C°))
-
 - Total precipitation (Total Precip (mm))
 
 ##### **City of Montreal's Data (2014-2019)**
-
 - Shape file of the city of Montreal (excluding the Greater Montreal area)
 
 
@@ -100,13 +77,13 @@ In addition, the presence of the latitude and longitude of the start and end poi
 - ##### **Distance imputation**
 If a person was departing from the same station to which they were returning, the distance would equal to zero if we only take the latitude and longitude of the station into account. However, if the person spent some time on their ride, it means that they did cover some distance. Thus, the distances of zero kilometers and with the duration of at least 2 were imputed. For that, at first the average speed from the set that doesn’t contain duration<2 and km=0 was calculated. After that the zero kilometer values were imputed by multiplying the ride duration by the average speed. 
 
+
 ### **The analysis**
 A considerable time of the project was dedicated to data preparation for analysis as multiple files had to be imported into R-Studio and they had to be appended, merged, some values had to be aggregated and some data transformation was needed. For the simplicity purposes, I am only showing some snippets of the code that, given that the datasets are available, will make the whole project presented here completely replicable. All the sets used in this post as well as the R code presented here are available [on GitHub](https://github.com/mdarina/bixi_analysis). Feel free to go there to access the data provided and replicate the project using my data! 
 
+
 ### **Loading the libraries**
 To replicate my analysis you will only need these three libraries: library(scales) is great for number formatting, ggplot is amazing for graphs that you will see a lot here! and rgdal is need to work with maps.
-
-
 
 ```r
 library(scales)
@@ -118,18 +95,16 @@ library(rgdal)
 When I began this work on the BIXI data, I was just really curious to know how popular BIXI was in the most recent year - 2019. I was sure that it was not a great year for them, given the entrance of multiple competitors into the market - JUMP by Uber with their electro-bikes and Lime with their electro-scooters. Here is some quick and inetersting facts about BIXI's 2019 year!
 
 ##### **Total number of rides (after discarding rides < 2 minutes)**
-
 ```
 ## [1] "5,377,512"
 ```
 
 ##### **Total distance covered in 2019 in km (imputed)**
-
 ```
 ## [1] "10,774,585"
 ```
-##### **Total hours of rides in 2019 (rides < 2 minutes - discarded)**
 
+##### **Total hours of rides in 2019 (rides < 2 minutes - discarded)**
 ```
 ## [1] "1,249,396"
 ```
@@ -137,7 +112,6 @@ When I began this work on the BIXI data, I was just really curious to know how p
 
 ### **Do members or non-members drive BIXI sales?**
 As you will see in the graph below, most of the passes are bought by non-members. However, these passes are short-term only! Riders can use them for a 30-minute ride or for a day ride, for example. Member passes are typically annual passes and they are a way costlier than the short-term passes bought by non-members.
-
 
 ```r
 mem_df <- read.csv("mem_df.csv")
