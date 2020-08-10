@@ -11,7 +11,7 @@ output:
 
 
 <center>
-![](/images/bixi.jpg)
+[[https://github.com/mdarina/mdarina.github.io/blob/master/images/bixi.jpg]]
 </center>
 
 ### **Why Bixi?**
