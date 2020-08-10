@@ -384,8 +384,8 @@ ggplot(subset(weather_allr, wet=="Wet"), aes(x=Mean_temp,
 
 
 ### **Sources:**
-1. BIXI Montreal: https://www.bixi.com/en/open-data
-2. Environment Canada (2014-2019): https://weather.gc.ca/canada_e.html
+1. BIXI Montreal: [https://www.bixi.com/en/open-data](https://www.bixi.com/en/open-data)
+2. Environment Canada (2014-2019): [https://weather.gc.ca/canada_e.html](https://weather.gc.ca/canada_e.html)
 3. City of Montreal: http://donnees.ville.montreal.qc.ca/dataset/polygones-arrondissements
 4. Gregoire, C-M. Aug 13, 2019. Understanding BIXI Commuters: An Analysis of Montreal’s Bike Share System in Python. Source: https://towardsdatascience.com/understanding-bixi-commuters-an-analysis-of-montreals-bike-share-system-in-python-cb34de0e2304
 5. McCray, Ch. How does weather impact bike traffic in Montreal? Source: https://web.meteo.mcgill.ca/cmccray/weather-bike-traffic-montreal/ 
