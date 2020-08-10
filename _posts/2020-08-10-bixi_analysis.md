@@ -11,7 +11,7 @@ output:
 
 
 <center>
-[[https://github.com/mdarina/mdarina.github.io/blob/master/images/bixi.jpg]]
+"/images/dariia_dziuba.jpg"
 </center>
 
 ### **Why Bixi?**
