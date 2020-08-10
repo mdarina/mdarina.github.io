@@ -11,7 +11,7 @@ output:
 
 
 <center>
-"/images/dariia_dziuba.jpg"
+  <img src="imgages/bixi.jpg" />
 </center>
 
 ### **Why Bixi?**
