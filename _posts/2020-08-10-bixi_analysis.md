@@ -1,12 +1,6 @@
 
 ---
 title: "Analyzing Bixi Data"
-author: "Dariia Dziuba"
-date: August 9, 2020
-output: 
-  html_document: 
-    fig_caption: yes
-    keep_md: yes
 ---
 
 
