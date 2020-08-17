@@ -16,8 +16,7 @@ output:
 ### **A little about BIXI**
 BIXI, a bike sharing service, is an organic part of the urban transit landscape in Montreal. I do think it was really smart of the city authorities to integrate bikes into the public transport network, and a proof of it is in a constantly growing number of rides taken by either BIXI members or occasional riders. The year of 2019 was a [banner year for the company](https://montreal.ctvnews.ca/bixi-in-2019-bike-sharing-service-breaks-record-1.4686218)!  
 
-
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-14-1.png" >
 
 As a result of growing demand, the number of available BIXI stations is also growing, making both more bikes available for rent and opening up new routes to BIXI users.
 
