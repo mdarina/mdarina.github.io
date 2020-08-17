@@ -1,5 +1,5 @@
 ---
-title: "Forecasting BIXI Member Rides"
+title: "Forecasting 2020 BIXI Rides"
 author: "Dariia Dziuba"
 date: "8/16/2020"
 output: 
