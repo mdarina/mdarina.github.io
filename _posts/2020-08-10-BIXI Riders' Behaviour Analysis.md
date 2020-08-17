@@ -1,3 +1,13 @@
+---
+title: "BIXI Riders' Behaviour Analysis"
+author: "Dariia Dziuba"
+date: August 8, 2020
+output: 
+  html_document: 
+    fig_caption: yes
+    keep_md: yes
+---
+
 <center>
   <img src="/images/bixi.jpg" >
 </center>
