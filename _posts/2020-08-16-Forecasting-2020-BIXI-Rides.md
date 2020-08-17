@@ -134,6 +134,7 @@ ggseasonplot(bixi.ts)+ggtitle("Bixi rides by months of the season: 2014-2019")+
 <img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-16-1.png" >
 
 Finally, knowing more about the data, I turned to the distribution analsis of BIXI rides. Apart from checking for the distribution of the original/ regular rides, I also tried various Box-Cox transformations: logging the data, finding the inverse (1/Rides) and the square root of the rides. These resulted in highly skewed distributions either to the right (log(Rides)) or to the left (1/Rides) or in a distribution similar to the orginial rides (sqrt(Rides)). As a result, I decided to proceed with the regular non-transformed rides. 
+
 <img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-17-1.png" >
 
 
