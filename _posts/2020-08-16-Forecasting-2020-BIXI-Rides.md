@@ -16,19 +16,19 @@ output:
 ### **A little about BIXI**
 BIXI, a bike sharing service, is an organic part of the urban transit landscape in Montreal. I do think it was really smart of the city authorities to integrate bikes into the public transport network, and a proof of it is in a constantly growing number of rides taken by either BIXI members or occasional riders. The year of 2019 was a [banner year for the company](https://montreal.ctvnews.ca/bixi-in-2019-bike-sharing-service-breaks-record-1.4686218)!  
 
-<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-14-1.png" >
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-4-1.png" >
 
 As a result of growing demand, the number of available BIXI stations is also growing, making both more bikes available for rent and opening up new routes to BIXI users.
 
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-6-1.png" >
 
 Mapping of 2014 and 2019 BIXI stations shows how BIXI expanded into the Greater Montreal area.
 
 
 
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-9-1.png" >
 
 ### **Task**
 The purpose of this analysis is to forecast a number of BIXI rides in 2020 adjusted for the COVID-19 situation.
@@ -117,11 +117,11 @@ As we can observe from the graph below, the data is not stationary as there is a
 autoplot(bixi.ts/1000, main="BIXI rides by months: 2014-2019", xlab="Year", ylab="BIXI rides, '000", color="navy")
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-14-1.png" >
 
 
 Further aggregation of the data (per year) and plotting it, made the trend more distinctive. We observe almost a straight upward line.
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-15-1.png" >
 
 To dive further into the seasonality of the time series at hand, I created a seasonal plot. The BIXI's year begins in April, which is represented by month=1 in the plot. We can obviously see that July has the greatest number of trips. In 2017 and 2019 July's (month=4) rides were unusually high. It may have been caused by an increase in tourism. In 2017 both Montreal and Canada had [special anniversaries to celebrate](https://montreal.ctvnews.ca/2017-a-banner-year-for-tourism-tourisme-montreal-1.3830843) - 375 and 150 years respectively. In July 2019 soccer fans were overwhelmed with the arrival of [Real Madrid to Montreal](https://globalnews.ca/news/5482464/real-madrid-montreal-training/), which could have resulted in large numbers of fans coming to Montreal. 
 
@@ -131,10 +131,10 @@ ggseasonplot(bixi.ts)+ggtitle("Bixi rides by months of the season: 2014-2019")+
   xlab("Months of the season")+ylab("Rides, '000")
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-16-1.png" >
 
 Finally, knowing more about the data, I turned to the distribution analsis of BIXI rides. Apart from checking for the distribution of the original/ regular rides, I also tried various Box-Cox transformations: logging the data, finding the inverse (1/Rides) and the square root of the rides. These resulted in highly skewed distributions either to the right (log(Rides)) or to the left (1/Rides) or in a distribution similar to the orginial rides (sqrt(Rides)). As a result, I decided to proceed with the regular non-transformed rides. 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-17-1.png" >
 
 
 ### **Partitioning the data**
@@ -195,7 +195,7 @@ accuracy(trainSN, valid.ts) #checking accuracy
 checkresiduals(trainSN) #checking residuals, pretty good!
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-21-1.png" >
 
 ```
 ## 
@@ -215,7 +215,7 @@ autoplot(trainSN) + autolayer(fitted(trainSN)) +
   autolayer(valid.ts, color="black") 
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-22-1.png" >
 
 
 
@@ -252,7 +252,7 @@ accuracy(Hwtr1, valid.ts) #checking accuracy
 checkresiduals(Hwtr1) #checking residuals, not bad :)
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-25-1.png" >
 
 ```
 ## 
@@ -271,7 +271,7 @@ autoplot(Hwtr1) + autolayer(fitted(Hwtr1)) +
   autolayer(valid.ts, color="black") 
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-26-1.png" >
 
 
 
@@ -289,7 +289,7 @@ lag1_8 <- diff(diff(bixi.ts,8),1)
 ```
 
 We may observe that differencing the data at a lag=1 makes it more or less stationary. However, the best result can be observed when double differencing is used - at lag=1 and lag=8.
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-28-1.png" >
 
 Continuing the exploration of the data before fitting ARIMA, I checked for autocorrelation of the original rides by running the Ljung-Box test. The result with its p-value being close to zero indicated that there was a serial autocorrelation present at least at up to 8 lags.
 
@@ -315,7 +315,7 @@ acf(bixi.ts, main="Regular Rides") #autocorrelation plot
 pacf(bixi.ts, main="Regular Rides") #partial autocorrelation plot
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-30-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-30-1.png" >
 
 
 I tried multiple models: ARIMA(1,0,0), ARIMA(1,1,0), and seasonal and non-seasonal Auto-ARIMA. The best model was the one automatically selected by R - ARIMA(1,0,0)(0,1,0)[8] with a drift. It did have the lowest error terms out of all fitted ARIMA models. In addition, the distance between the errors for the training and validation data was not large, which was indicative of no data overfitting and the model's consistent performance for both training and validation data. The residuals did not seem to show any particular patterns, but they were very high and their variance was not constant. On the other hand, the forecasts followed the data closely and the confidence interval included the actual data, which could result in a more or less accurate forecast for 2020. The model's output is presented below.
@@ -336,7 +336,7 @@ tr.arima <- forecast(auto.arima(train.ts), h=nvalid, level=c(95))
 ## Test set     0.479017515 0.2662769
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-33-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-33-1.png" >
 
 ```
 ## 
@@ -348,7 +348,7 @@ tr.arima <- forecast(auto.arima(train.ts), h=nvalid, level=c(95))
 ## Model df: 2.   Total lags used: 6
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-34-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-34-1.png" >
 
 
 ### **The best model**
@@ -405,7 +405,7 @@ Checking the Holt-Winter's multiplicative and Auto-ARIMA residual plots, the Win
 checkresiduals(Hwtr1)
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-36-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-36-1.png" >
 
 ```
 ## 
@@ -422,7 +422,7 @@ checkresiduals(Hwtr1)
 checkresiduals(tr.arima)
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-36-2.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-36-2.png" >
 
 ```
 ## 
@@ -504,7 +504,7 @@ summary(bixi2020)
 autoplot(bixi2020) + autolayer(fitted(bixi2020))
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-37-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-37-1.png" >
 
 
 ### **Adjusting for the COVID-19 situation: Optimistic**
@@ -636,7 +636,7 @@ bixi_adj2020.ts <- ts(bixi_adj2020$Adj_FC, start=c(2020,1), freq=8)
 autoplot(bixi2020) + autolayer(fitted(bixi2020))+autolayer(bixi_adj2020.ts)
 ```
 
-![](2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-45-1.png)<!-- -->
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-45-1.png" >
 
 As we can see the adjusted forecast is too close to the lower boundary of the confidence interval of the forecast. However, we could have further worsened it by taking other factors into account: students that stopped commuting to school, employed people that no longer commute to work as they are working from home, for example. 
 
@@ -651,22 +651,20 @@ As we can see the adjusted forecast is too close to the lower boundary of the co
 
 
 ### **Sources**
-1. BIXI Montreal: https://www.bixi.com/en/open-data
+1. [BIXI Montreal](https://www.bixi.com/en/open-data)
 
-2. BIXI Montreal: Sommaire financier & activites, 2019: https://sitewebbixi.s3.amazonaws.com/uploads/docs/tats-financiers-abreges-2019-f79c8a.pdf
+2. [BIXI Montreal: Sommaire financier & activites, 2019](https://sitewebbixi.s3.amazonaws.com/uploads/docs/tats-financiers-abreges-2019-f79c8a.pdf)
 
-3. Boshra, Basem. (November 14, 2019). Bixi in 2019: Bike-sharing service breaks record. Bixi in 2019: Bike-sharing service breaks record: https://montreal.ctvnews.ca/bixi-in-2019-bike-sharing-service-breaks-record-1.4686218
+3. [Boshra, Basem. (November 14, 2019). Bixi in 2019: Bike-sharing service breaks record. Bixi in 2019](Bike-sharing service breaks record: https://montreal.ctvnews.ca/bixi-in-2019-bike-sharing-service-breaks-record-1.4686218)
 
-4. City of Montreal: http://donnees.ville.montreal.qc.ca/dataset/polygones-arrondissements
+4. [City of Montreal](http://donnees.ville.montreal.qc.ca/dataset/polygones-arrondissements)
 
-5. Labour force characteristics by census metropolitan area, three-month moving average, seasonally adjusted and unadjusted, last 5 months. Table: 14-10-0294-01: https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410029401&pickMembers%5B0%5D=2.7&pickMembers%5B1%5D=3.1&pickMembers%5B2%5D=4.2&cubeTimeFrame.startMonth=04&cubeTimeFrame.startYear=2019&cubeTimeFrame.endMonth=07&cubeTimeFrame.endYear=2019&referencePeriods=20190401%2C20190701
+5. [Labour force characteristics by census metropolitan area, three-month moving average, seasonally adjusted and unadjusted, last 5 months. Table: 14-10-0294-01](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410029401&pickMembers%5B0%5D=2.7&pickMembers%5B1%5D=3.1&pickMembers%5B2%5D=4.2&cubeTimeFrame.startMonth=04&cubeTimeFrame.startYear=2019&cubeTimeFrame.endMonth=07&cubeTimeFrame.endYear=2019&referencePeriods=20190401%2C20190701)
 
-6. Labour market characteristics, seasonally adjusted monthly data, Montréal and all of Québec, July 2019 to July 2020: 
-https://www.stat.gouv.qc.ca/statistiques/profils/profil06/societe/marche_trav/indicat/tra_mens06_an.htm
+6. [Labour market characteristics, seasonally adjusted monthly data, Montréal and all of Québec, July 2019 to July 2020](https://www.stat.gouv.qc.ca/statistiques/profils/profil06/societe/marche_trav/indicat/tra_mens06_an.htm)
 
-7. Oduro, Kwabena. (May 30, 2020). Coronavirus: Montreal’s tourism to take a massive hit in revenues due to COVID-19 pandemic. Global News. https://globalnews.ca/news/7007853/coronavirus-montreal-tourism-hit/
+7. [Oduro, Kwabena. (May 30, 2020). Coronavirus: Montreal’s tourism to take a massive hit in revenues due to COVID-19 pandemic. Global News](https://globalnews.ca/news/7007853/coronavirus-montreal-tourism-hit/)
 
-8. The Canadian Press. (March 6, 2018). 2017 a banner year for tourism: Tourisme Montreal. CTV News. 
-https://montreal.ctvnews.ca/2017-a-banner-year-for-tourism-tourisme-montreal-1.3830843
+8. [The Canadian Press. (March 6, 2018). 2017 a banner year for tourism: Tourisme Montreal. CTV News](https://montreal.ctvnews.ca/2017-a-banner-year-for-tourism-tourisme-montreal-1.3830843)
 
-9. The Staff. (July 10, 2019). Global News. Real Madrid in Montreal for more than a week of training: https://globalnews.ca/news/5482464/real-madrid-montreal-training/
+9. [The Staff. (July 10, 2019). Global News. Real Madrid in Montreal for more than a week of training](https://globalnews.ca/news/5482464/real-madrid-montreal-training/)
