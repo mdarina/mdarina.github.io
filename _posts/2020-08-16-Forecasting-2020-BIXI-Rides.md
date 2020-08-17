@@ -290,6 +290,7 @@ lag1_8 <- diff(diff(bixi.ts,8),1)
 ```
 
 We may observe that differencing the data at a lag=1 makes it more or less stationary. However, the best result can be observed when double differencing is used - at lag=1 and lag=8.
+
 <img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-28-1.png" >
 
 Continuing the exploration of the data before fitting ARIMA, I checked for autocorrelation of the original rides by running the Ljung-Box test. The result with its p-value being close to zero indicated that there was a serial autocorrelation present at least at up to 8 lags.
@@ -656,7 +657,7 @@ As we can see the adjusted forecast is too close to the lower boundary of the co
 
 2. [BIXI Montreal: Sommaire financier & activites, 2019](https://sitewebbixi.s3.amazonaws.com/uploads/docs/tats-financiers-abreges-2019-f79c8a.pdf)
 
-3. [Boshra, Basem. (November 14, 2019). Bixi in 2019: Bike-sharing service breaks record. Bixi in 2019](Bike-sharing service breaks record: https://montreal.ctvnews.ca/bixi-in-2019-bike-sharing-service-breaks-record-1.4686218)
+3. [Boshra, Basem. (November 14, 2019). Bixi in 2019: Bike-sharing service breaks record. Bixi in 2019. Bike-sharing service breaks record](https://montreal.ctvnews.ca/bixi-in-2019-bike-sharing-service-breaks-record-1.4686218)
 
 4. [City of Montreal](http://donnees.ville.montreal.qc.ca/dataset/polygones-arrondissements)
 
