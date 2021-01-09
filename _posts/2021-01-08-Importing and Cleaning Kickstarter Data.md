@@ -12,6 +12,10 @@ output:
 <img src="/images/kickstarter_picture.png" >
 </center>
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 ### **Why Kickstarter?**
 If you need to find funds to realize your idea, [Kickstarter](https://www.kickstarter.com) may be an option for you being an [all-or-nothing](https://www.kickstarter.com/help/handbook/funding) crowdfunding platform. There is a catch, though! Only those projects that have reached their monetary goal threshold will get the pledged money.
 
