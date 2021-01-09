@@ -9,7 +9,7 @@ output:
 ---
 
 <center>
-  <img src="/images/bixi.jpg" >
+  <img src="/images/bixi2.png" >
 </center>
 
 ### **Why Bixi?**
