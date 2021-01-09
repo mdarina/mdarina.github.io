@@ -499,6 +499,7 @@ names(currency)[1] <- "date"
 ```
 
 - Pivot it using the tidyr package to get currency column names in the column named "currency" and the currency exchange rates in the column called "rate"
+
 ```r
 #Pivoting the currency table to get 
 #the column names into the column levels
@@ -524,6 +525,7 @@ currency_pivot <- currency_pivot[,-1]
 ```
 
 - In the master set create a date column based on the projects' launched_at dates, but each date should also start on the first day of the month.
+
 ```r
 #create a date that starts with the first day of the month
 #will be used as a part of the composite key
@@ -538,6 +540,7 @@ kickstarter_data$currency_date <- as.Date(generated_date)
 ```
 
 - Use the currency (with local currency names) and the newly created columns with dates as a composite key for the left join (the kickstarter master set is the left set). 
+
 ```r
 #Merging two sets
 kickstarter_all <- kickstarter_data %>% left_join(currency_pivot, 
@@ -546,6 +549,7 @@ kickstarter_all <- kickstarter_data %>% left_join(currency_pivot,
 
 - Add new variables
 I created goalUSD and pledgedUSD for easier comparison across projects. I also created PledgedOverGoal variable to see by how much the pledged amount was different from the goal amount and pledgedPerBacker to see what average sum was pledged by a backer.   
+
 ```r
 kickstarter_all$goalUSD <- round(kickstarter_all$goal*kickstarter_all$rate,2)
 kickstarter_all$pledgedUSD <- round(kickstarter_all$pledged*kickstarter_all$rate,2)
@@ -554,6 +558,7 @@ kickstarter_all$pledgedPerBacker <- round(kickstarter_all$pledgedUSD/kickstarter
 ```
 
 - Save the new data
+
 ```r
 #SAVING THE FINAL SET - WITH THE USD DATA
 write.csv(kickstarter_all, "D:/kickstarter/kickFull.csv", 
