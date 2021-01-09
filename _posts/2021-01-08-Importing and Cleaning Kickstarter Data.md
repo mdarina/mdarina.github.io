@@ -9,7 +9,7 @@ output:
 ---
 
 <center>
-<img src="/images/kickstarter_picture.png" >
+<img src="/images/kickstarter_picture1.png" >
 </center>
 
 ### **Why Kickstarter?**
