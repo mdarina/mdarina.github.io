@@ -212,7 +212,7 @@ kick$categories <- str_extract(kick$category$slug, "[[:alnum:]\\s&]+")
 ```
 Only a part of the code is presented here. The full code used can be found in [my GitHub repository](https://github.com/mdarina/kickstarter_data_cleaning).
 
-### **How were csv Files Imported?**
+### **How were CSV Files Imported?**
 Even though JSON files were available for all months, I opted for csv because they were much faster to import and save. Say, the July 2019 folder contained 57 files. It took R studio only 3 minutes to import those files into R, append them to each other and save them as a single July2019 csv file on my computer. Reading JSON files took a way longer. To read all 61 zipped archives with csv files and then save them as csv monthly files I created two loops:
 
 - One loop - to unzip the files:
@@ -354,8 +354,7 @@ status = as.character(ifelse (kick$pledged>=kick$goal, "successful", "failed"))
 kickstart$projectDays <- difftime(kickstart$deadline,kickstart$launched_at, units="days")
 ```
 
-
-#### ***Cleaning and Transforming Data***
+### **How Were the Data Cleaned and Transformed?**
 - #### **Timestamp in the UNIX Format**
 The UNIX date is not readable by humans and looks like that: 1368652795. According to [Wikipedia](https://en.wikipedia.org/wiki/Unix_time), Unix time is "the number of seconds that have elapsed since the Unix epoch, minus leap seconds; the Unix epoch is 00:00:00 UTC on 1 January 1970". Here are the steps I had to take to make them readable by us:
 
@@ -521,8 +520,7 @@ kickstarter_all$pledgedPerBacker <- round(kickstarter_all$pledgedUSD/kickstarter
 write.csv(kickstarter_all, "D:/kickstarter/kickFull.csv", row.names = FALSE)
 ```
 
-
-#### ***Creating the Final Set for Analysis***
+### **How was the Final Set Created for Further Analysis?**
 For the analysis, I did not want to include any projects whose deadline had not been reached before the data were scraped in December 2020. So, the projects whose deadline was on the 17th of December 2020 or later were discarded. The projects that were cancelled or suspended were also discarded. The resulting set was recorded and saved for further analysis!  
 ```{r, eval=F, echo=T}
 #CREATE A SET FOR ANALYSIS
