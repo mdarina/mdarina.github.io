@@ -492,7 +492,7 @@ The goal and pledged amounts were given in the local currency, which made compar
 #ADDING CURRENCY EXCHANGE VALUES TO THE KICKSTARTER DATA
 #IMPORTING A CSV FILE
 currency <- read.csv("D:\\kickstarter\\extra_files\\currency.csv", 
-                                              stringsAsFactors = F)
+                                            stringsAsFactors = F)
 
 #Renaming the date variable
 names(currency)[1] <- "date"
