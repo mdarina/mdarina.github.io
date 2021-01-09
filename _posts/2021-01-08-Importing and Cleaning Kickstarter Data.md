@@ -218,6 +218,7 @@ Only a part of the code is presented here. The full code used can be found in [m
 Even though JSON files were available for all months, I opted for csv because they were much faster to import and save. Say, the July 2019 folder contained 57 files. It took R studio only 3 minutes to import those files into R, append them to each other and save them as a single July2019 csv file on my computer. Reading JSON files took a way longer. To read all 61 zipped archives with csv files and then save them as csv monthly files I created two loops:
 
 - One loop - to unzip the files:
+
 ```r
 for(x in 2015:2020){
   mydir <- paste("D:/kickstarter",x,sep="/")
@@ -232,12 +233,14 @@ for(x in 2015:2020){
 ```
 
 - The other loop - to read, append and save files:
+
 ```r
 #READING, CLEANING AND MERGING SETS FOR YEARS: 2015-2020
 #USING A FOR LOOP
 for(year in 2015:2020){
   mydir <- paste("D:/kickstarter",year,sep="/")
-  zip_file <- list.files(path=mydir, pattern="*.zip", full.names=T)
+  zip_file <- list.files(path=mydir, pattern="*.zip", 
+                                    full.names=T)
 for(x in 1:length(zip_file)){
 mydir <- paste("D:/kickstarter",year, x,sep="/")
 setwd(mydir)
@@ -246,9 +249,11 @@ setwd(mydir)
 date_month <- substr(sub(".*/","",zip_file[x]), 18,19)
 
 #reading csv files in batch
-kick <- do.call(rbind, lapply(list.files(path = mydir, pattern="*.csv", full.names=T), read.csv))
+kick <- do.call(rbind, lapply(list.files(path = mydir, 
+                  pattern="*.csv", full.names=T), read.csv))
 
-#The code used to create or clean columns, bind columns and so on is missing in this code snippet
+#The code used to create or clean columns, bind columns 
+#and so on is missing in this code snippet
 }
 }
 ```
@@ -267,6 +272,7 @@ Unzipping and importing them manually meant making multiple errors on the way wi
 - Unzipping csv files was the same as for the JSON data (library(plyr)):
 
 I created two loops: the outer FOR-loop initiates an iteration for a specific year, the inner FOR-loop creates a folder for a specific month while the ldply function unzips files into that folder. After the inner loop is done with all the months in that year, it goes to the next year. FOR-loops I created had to be flexible because the year of 2015 had 2 month, the year of 2016 - 11, while 2017-2020 had 12 months which made it impossible to define a fixed range for the inner loop. To resolve the issue, I created a list of all zip files per year, the number of elements in which corresponded to the number of months in a specific year. Instead of specifying the maximum of the range, I used the length() function. It just returns a value that represents a number of elements in a list. It allowed me make the loop flexible since the maximum value of range always depended on the number of zip files in the list. The code with comments is presented below.
+
 ```r
 #Importing the library
 library(plyr)
