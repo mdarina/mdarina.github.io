@@ -424,7 +424,7 @@ newSet  <- kickstarter2014_2020[order(kickstarter2014_2020$id,
                                   kickstarter2014_2020$dateScraped, decreasing = TRUE),]
 ```
 <center>
-<img src="/images/project_duplicates.png" >
+<img src="/images/project_duplicates.PNG" >
 </center>
 
 
@@ -437,7 +437,7 @@ kickAll<- newSet[!duplicated(newSet$id), ]
 
 As can be seen in the image, removing duplicate ids has decreased the number of observations considerably! By almost 12 million rows!
 <center>
-<img src="/images/dimensions.png" >
+<img src="/images/dimensions.PNG" >
 </center>
 
 5) If necessary, the file may be saved as a csv file. It is not the final version of the file yet.
