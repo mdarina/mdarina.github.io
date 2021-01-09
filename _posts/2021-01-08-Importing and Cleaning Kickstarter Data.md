@@ -74,6 +74,7 @@ I applied the following procedure: Unzip all files -> Import the data into R -> 
 
 ### **How were JSON Files Imported?**
 The 2015 October archive file had the .gz extension. I had to save it to zip so that all files had the same extension. Then everything was ready for the data import. At first I created a loop to unzip all the JSON data archives:
+
 ```{r, eval=F, echo=T}
 #Importing the library
 library(plyr)
