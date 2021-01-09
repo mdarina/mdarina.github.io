@@ -12,10 +12,6 @@ output:
 <img src="/images/kickstarter_picture.png" >
 </center>
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ### **Why Kickstarter?**
 If you need to find funds to realize your idea, [Kickstarter](https://www.kickstarter.com) may be an option for you being an [all-or-nothing](https://www.kickstarter.com/help/handbook/funding) crowdfunding platform. There is a catch, though! Only those projects that have reached their monetary goal threshold will get the pledged money.
 
@@ -79,7 +75,7 @@ I applied the following procedure: Unzip all files -> Import the data into R -> 
 ### **How were JSON Files Imported?**
 The 2015 October archive file had the .gz extension. I had to save it to zip so that all files had the same extension. Then everything was ready for the data import. At first I created a loop to unzip all the JSON data archives:
 
-```{r, eval=F, echo=T}
+```r
 #Importing the library
 library(plyr)
 #WORKING WITH JSON DATA
