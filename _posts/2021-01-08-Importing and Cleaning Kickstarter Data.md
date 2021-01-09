@@ -121,7 +121,8 @@ file <- sub(".*/","",list.files(path = mydir, pattern="*.json",
                                         full.names=T))
   
 #reading the JSON file
-one <- fromJSON('Kickstarter_Kickstarter.json', simplifyVector = FALSE)
+one <- fromJSON('Kickstarter_Kickstarter.json', 
+                  simplifyVector = FALSE)
   
 #unnesting lists (tidyr library)
 kick <- tibble(data=one) %>% unnest_wider(data) %>% 
