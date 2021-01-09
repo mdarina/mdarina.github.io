@@ -508,6 +508,7 @@ currency_pivot <- currency %>% pivot_longer(-date,
 ```
 
 - Create a date column so that each month begins on the first day, i.e. 2009-01-12, etc.
+
 ```r
 #Changing the date format
 currency_pivot$date <- dmy(currency_pivot$date)
@@ -538,7 +539,7 @@ kickstarter_data$currency_date <- as.Date(generated_date)
 
 - Use the currency (with local currency names) and the newly created columns with dates as a composite key for the left join (the kickstarter master set is the left set). 
 ```r
-#MERGING TWO SETS
+#Merging two sets
 kickstarter_all <- kickstarter_data %>% left_join(currency_pivot, 
                               by = c("currency_date", "currency"))
 ```
