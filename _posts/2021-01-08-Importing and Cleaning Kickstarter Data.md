@@ -129,7 +129,8 @@ kick <- tibble(data=one) %>% unnest_wider(data) %>%
         unnest_longer(projects) %>% unnest_wider(projects)
   
 #extracting and renaming creator id
-creator <- tibble(creator = kick$creator) %>% unnest_wider(creator)
+creator <- tibble(creator = kick$creator) %>% 
+                                      unnest_wider(creator)
 creatorId = as.data.frame(creator$id)
 kick$creatorId <-  creatorId$`creator$id`
   
@@ -178,10 +179,6 @@ After those issues had been solved, the data was read in the same way as the 201
 
 The October 2015 file, however, was a different fruit :) It represented just rows of data in the JSON format. So, the file had to be read in a different way. I applied a different code to import it:
 ```r
-#IMPORTING THE LAST JSON 2015 FILE (OCTOBER)
-#THIS FILE WAS DIFFERENT FROM ALL OTHER JSON FILES
-#IT CONTAINED ONLY ROWS OF CODE, SO HAD TO BE READ VIA
-#READLINES FUNCTION AT FIRST
 year <- 2015
 mydir <- paste("D:/kickstarter/json_files14_15",year,sep="/")
 zip_file <- list.files(path=mydir, pattern="*.zip", full.names=T)
@@ -192,13 +189,15 @@ setwd(mydir)
 #creating a variable that retrieves a month value from a file name
 date_month <- substr(sub(".*/","",zip_file[x]), 18,19)
   
-file <- sub(".*/","",list.files(path = mydir, pattern="*.json", full.names=T))
+file <- sub(".*/","",list.files(path = mydir, pattern="*.json", 
+                                                    full.names=T))
 
 #reading JSON lines
 out <- lapply(readLines(file), fromJSON)
 
 #unnesting JSON
-one <- tibble(data=out) %>% unnest_wider(data) %>% unnest_wider(data)%>% unnest_longer(projects) 
+one <- tibble(data=out) %>% unnest_wider(data) %>% 
+                    unnest_wider(data)%>% unnest_longer(projects) 
 
 #the projects' column contains dataframes, not lists
 kick <- one$projects 
@@ -206,7 +205,8 @@ kick <- one$projects
 #extracting and renaming creator id from the dataframe
 kick$creatorId <- kick$creator$id
 
-#renaming variable state to condition (because I would like the variable state to represent a location)
+#renaming variable state to condition (because 
+#I would like the variable state to represent a location)
 names(kick)[names(kick) == "state"] <- "condition"
   
 #extracting location data
@@ -215,7 +215,8 @@ kick$region <- kick$location$state
 
 #extracting categories and subcategories
 kick$subcategoryName <- kick$category$name
-kick$categories <- str_extract(kick$category$slug, "[[:alnum:]\\s&]+")
+kick$categories <- str_extract(kick$category$slug, 
+                                      "[[:alnum:]\\s&]+")
 
 ```
 Only a part of the code is presented here. The full code used can be found in [my GitHub repository](https://github.com/mdarina/kickstarter_data_cleaning).
@@ -228,7 +229,8 @@ Even though JSON files were available for all months, I opted for csv because th
 ```r
 for(x in 2015:2020){
   mydir <- paste("D:/kickstarter",x,sep="/")
-  zip_file <- list.files(path=mydir, pattern="*.zip", full.names=T)
+  zip_file <- list.files(path=mydir, pattern="*.zip", 
+                                        full.names=T)
   for(i in 1:length(zip_file)){
     dir.create(file.path(mydir, i))
     setwd(file.path(mydir, i))
@@ -251,12 +253,13 @@ for(x in 1:length(zip_file)){
 mydir <- paste("D:/kickstarter",year, x,sep="/")
 setwd(mydir)
 
-#creating a variable that retrieves a month value from a file name
+#creating a variable that retrieves 
+#a month value from a file name
 date_month <- substr(sub(".*/","",zip_file[x]), 18,19)
 
 #reading csv files in batch
 kick <- do.call(rbind, lapply(list.files(path = mydir, 
-                  pattern="*.csv", full.names=T), read.csv))
+             pattern="*.csv", full.names=T), read.csv))
 
 #The code used to create or clean columns, bind columns 
 #and so on is missing in this code snippet
@@ -284,17 +287,21 @@ I created two loops: the outer FOR-loop initiates an iteration for a specific ye
 library(plyr)
 
 #Creating the loops
-#The outer loop for years that also creates a directory and a list of .zip files in it
+#The outer loop for years that also creates 
+#a directory and a list of .zip files in it
 for(x in 2015:2020){
-  mydir <- paste("D:/kickstarter",x,sep="/")
-  zip_file <- list.files(path=mydir, pattern="*.zip", full.names=T)
-#The inner loop specifies the maximum range value to equal to the number of elements
+mydir <- paste("D:/kickstarter",x,sep="/")
+zip_file <- list.files(path=mydir, pattern="*.zip", 
+                                      full.names=T)
+#The inner loop specifies the maximum range value
+#to equal to the number of elements
 #in the list of zip files for a specific year
   for(i in 1:length(zip_file)){
     dir.create(file.path(mydir, i)) #Create a directory
     setwd(file.path(mydir, i)) #Assign a directory
     ldply(.data=zip_file[i], .fun=unzip, 
-          exdir=paste(mydir,i,sep="/")) #Batch process files with .zip extension
+          exdir=paste(mydir,i,sep="/")) 
+#Batch process files with .zip extension
   }
 }
 ```
@@ -306,13 +313,14 @@ So, the steps were like that:
 
 1) Create a list of zip files for a specific year in the outer loop: 
 ```r
-
-#The outer loop for years that also creates a directory and a list of .zip files in it
+#The outer loop for years that also creates a directory 
+#and a list of .zip files in it
 for(x in 2015:2020){
   mydir <- paste("D:/kickstarter",x,sep="/")
-  zip_file <- list.files(path=mydir, pattern="*.zip", full.names=T) #a list of zip files for a specific year
+  zip_file <- list.files(path=mydir, pattern="*.zip", 
+                  full.names=T) 
+#a list of zip files for a specific year
   }
-
 ```
 
 2) In the inner loop extract a month value:
@@ -325,7 +333,9 @@ The value of the month can be retrieved from the location 18-19.
 ```r
 library(stringr)
 date_month <- substr(sub(".*/","",zip_file[x]), 18,19)
-#Here I am deleting everything before the final slash and retriving the value of the month at the position 18,19
+#Here I am deleting everything before the final 
+#slash and retriving the value of the month 
+#at the position 18,19
 ```
 
 - Paste that value together with the year to generate a date composed of year, month, day (01).
@@ -352,7 +362,8 @@ a <- paste(dates, year, ".csv", sep="")
 The code below is given just for demonstration purposes. I extracted it from a much bigger chunk of code given at the end of the post.
 
 ```r
-write.csv(kickstart, paste("D:/kickstarter", a,sep="/"), row.names = FALSE)
+write.csv(kickstart, paste("D:/kickstarter", a,sep="/"), 
+                                      row.names = FALSE)
 ```  
 The full code can be accessed in [my GitHub repository](https://github.com/mdarina/kickstarter_data_cleaning).
 
@@ -360,11 +371,15 @@ The full code can be accessed in [my GitHub repository](https://github.com/mdari
 - #### **Adding Variables to the Set**
 Between the data import and saving the monthly files as csv, I created additional variables - status (of the project) and projectDays:
 ```r
-#if the project was successful or not. Successful projects are the ones that reached or exceeded goals
-status = as.character(ifelse (kick$pledged>=kick$goal, "successful", "failed"))
+#if the project was successful or not. 
+#Successful projects are the ones that reached or exceeded goals
+status = as.character(ifelse (kick$pledged>=kick$goal, 
+                                        "successful", "failed"))
 
-#how many days the project lasted from the launch date to the deadline
-kickstart$projectDays <- difftime(kickstart$deadline,kickstart$launched_at, units="days")
+#how many days the project lasted from 
+#the launch date to the deadline
+kickstart$projectDays <- difftime(kickstart$deadline,
+                            kickstart$launched_at, units="days")
 ```
 
 ### **How Were the Data Cleaned and Transformed?**
@@ -379,7 +394,8 @@ The UNIX date is not readable by humans and looks like that: 1368652795. Accordi
  
 The code below is given just for demonstration purposes. The full code can be accessed in [my GitHub repository](https://github.com/mdarina/kickstarter_data_cleaning).
 ```r
-kickstart$created_at <- as.Date(as.POSIXct(as.numeric(as.character(kick$created_at)), origin="1970-01-01"))
+kickstart$created_at <- as.Date(as.POSIXct(as.numeric(as.character(kick$created_at)),
+                                                              origin="1970-01-01"))
 ```
 
 - #### **Some Columns Contained Values to be Assigned to Various Variables**
@@ -398,9 +414,11 @@ For instance, for the category names I deleted all the preceding text including 
 Here is an extract of the code for the new variables that I created based on the two columns described above.
 ```r
 #retrieving needed values, cleaning the data
-kick$categories <- str_extract(sub(".*\"slug\"","",kick$category), "[[:alnum:]\\s&]+")
+kick$categories <- str_extract(sub(".*\"slug\"","",kick$category), 
+                                              "[[:alnum:]\\s&]+")
 
-kick$creatorId <- str_extract(sub(".*\"id\"","", kick$creator), "\\d+")
+kick$creatorId <- str_extract(sub(".*\"id\"","", kick$creator), 
+                                                          "\\d+")
 ```
 
 It took only 2-3 minutes until the newly created csv file was saved! Only slightly above 2 hours were needed to process and save all the files! It's almost 14 times less hours than was required to save csv's when columns were split!
@@ -411,7 +429,8 @@ Some projects lasted for months and thus, they would be found in different month
 
 1) Generate a date that would correspond to the month and year when the set was scraped like in the example below. The date_month variable was described above. Its value comes from the date portion of the zip archive's name.
 ```r
-#The year is generated in the outer loop and the date_month is retreived 
+#The year is generated in the outer loop and 
+#the date_month is retreived 
 #from the month's value from the zip file name as described above
 
 kickstart$dateScraped <- as.Date(paste(year, date_month, 01, sep="-"))
@@ -423,7 +442,8 @@ kickstart$dateScraped <- as.Date(paste(year, date_month, 01, sep="-"))
 mydir <- "D:/kickstarter"
 
 #Merging all the files
-kickstarter2014_2020 <- do.call(rbind, lapply(list.files(path = mydir, pattern="*.csv", full.names=T), read.csv))
+kickstarter2014_2020 <- do.call(rbind, lapply(list.files(path = mydir,
+                            pattern="*.csv", full.names=T), read.csv))
 ```
 
 3) Sort the id column in any order and sort the dateScraped in the descending order.
@@ -433,7 +453,7 @@ kickstarter2014_2020$dateScraped <- as.Date(kickstarter2014_2020$dateScraped)
 
 #Sorting the set by projectId and date
 newSet  <- kickstarter2014_2020[order(kickstarter2014_2020$id, 
-                                  kickstarter2014_2020$dateScraped, decreasing = TRUE),]
+              kickstarter2014_2020$dateScraped, decreasing = TRUE),]
 ```
 <center>
 <img src="/images/project_duplicates.PNG" >
@@ -454,7 +474,8 @@ As can be seen in the image, removing duplicate ids has decreased the number of 
 5) If necessary, the file may be saved as a csv file. It is not the final version of the file yet.
 ```r
 #Saving the full file for further work
-write.csv(kickAll, "D:/kickstarter/kickAll.csv", row.names = FALSE)
+write.csv(kickAll, "D:/kickstarter/kickAll.csv", 
+                                    row.names = FALSE)
 ```
 
 
@@ -464,20 +485,23 @@ The goal and pledged amounts were given in the local currency, which made compar
 - Create a table with dates and average currency rates vs USD (a csv file)
 
 - Import that table into R
+
 ```r
 #ADDING CURRENCY EXCHANGE VALUES TO THE KICKSTARTER DATA
 #IMPORTING A CSV FILE
-currency <- read.csv("D:\\kickstarter\\extra_files\\currency.csv", stringsAsFactors = F)
+currency <- read.csv("D:\\kickstarter\\extra_files\\currency.csv", 
+                                              stringsAsFactors = F)
 
 #Renaming the date variable
 names(currency)[1] <- "date"
-
 ```
 
 - Pivot it using the tidyr package to get currency column names in the column named "currency" and the currency exchange rates in the column called "rate"
 ```r
-#Pivoting the currency table to get the column names into the column levels
-currency_pivot <- currency %>% pivot_longer(-date, names_to="currency", values_to="rate", values_drop_na=TRUE)
+#Pivoting the currency table to get 
+#the column names into the column levels
+currency_pivot <- currency %>% pivot_longer(-date, 
+            names_to="currency", values_to="rate", values_drop_na=TRUE)
 ```
 
 - Create a date column so that each month begins on the first day, i.e. 2009-01-12, etc.
@@ -512,8 +536,8 @@ kickstarter_data$currency_date <- as.Date(generated_date)
 - Use the currency (with local currency names) and the newly created columns with dates as a composite key for the left join (the kickstarter master set is the left set). 
 ```r
 #MERGING TWO SETS
-kickstarter_all <- kickstarter_data %>% left_join(currency_pivot, by = c("currency_date", "currency"))
-
+kickstarter_all <- kickstarter_data %>% left_join(currency_pivot, 
+                              by = c("currency_date", "currency"))
 ```
 
 - Add new variables
@@ -528,7 +552,8 @@ kickstarter_all$pledgedPerBacker <- round(kickstarter_all$pledgedUSD/kickstarter
 - Save the new data
 ```r
 #SAVING THE FINAL SET - WITH THE USD DATA
-write.csv(kickstarter_all, "D:/kickstarter/kickFull.csv", row.names = FALSE)
+write.csv(kickstarter_all, "D:/kickstarter/kickFull.csv", 
+                                        row.names = FALSE)
 ```
 
 ### **How was the Final Set Created for Further Analysis?**
@@ -539,14 +564,17 @@ For the analysis, I did not want to include any projects whose deadline had not 
 #- CUT OFF DATE - BEFORE THE FINAL SET WAS SCRAPED
 #- NOT CANCELED AND NOT SUSPENDED
 #Subsetting the data to only contain
-kickSuccess <- subset(kickFull, deadline < as.Date(paste(2020, 12, 17, sep="-")) &
-                        project_state != "canceled" & project_state != "suspended")
+kickSuccess <- subset(kickFull, 
+        deadline < as.Date(paste(2020, 12, 17, sep="-")) &
+        project_state != "canceled" & project_state != "suspended")
 
 #Checking if subsetting worked
 table(kickSuccess$project_state)
 
-#Saving the file for further reference - all the work will be done on this file
-write.csv(kickSuccess, "D:/kickstarter/kickSuccess.csv", row.names = FALSE)
+#Saving the file for further reference - all the work
+#will be done with this file
+write.csv(kickSuccess, "D:/kickstarter/kickSuccess.csv", 
+                                        row.names = FALSE)
 ```
 
 Finally, after the boring part was over, the data were ready for the analysis! You can access the full code in [my GitHub repository](https://github.com/mdarina/kickstarter_data_cleaning).
