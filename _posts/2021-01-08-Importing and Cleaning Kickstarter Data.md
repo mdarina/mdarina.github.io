@@ -370,16 +370,17 @@ The full code can be accessed in [my GitHub repository](https://github.com/mdari
 
 - #### **Adding Variables to the Set**
 Between the data import and saving the monthly files as csv, I created additional variables - status (of the project) and projectDays:
+
 ```r
 #if the project was successful or not. 
 #Successful projects are the ones that reached or exceeded goals
 status = as.character(ifelse (kick$pledged>=kick$goal, 
-                                        "successful", "failed"))
+                                       "successful", "failed"))
 
 #how many days the project lasted from 
 #the launch date to the deadline
 kickstart$projectDays <- difftime(kickstart$deadline,
-                            kickstart$launched_at, units="days")
+                           kickstart$launched_at, units="days")
 ```
 
 ### **How Were the Data Cleaned and Transformed?**
@@ -565,8 +566,8 @@ For the analysis, I did not want to include any projects whose deadline had not 
 #- NOT CANCELED AND NOT SUSPENDED
 #Subsetting the data to only contain
 kickSuccess <- subset(kickFull, 
-        deadline < as.Date(paste(2020, 12, 17, sep="-")) &
-        project_state != "canceled" & project_state != "suspended")
+      deadline < as.Date(paste(2020, 12, 17, sep="-")) &
+      project_state != "canceled" & project_state != "suspended")
 
 #Checking if subsetting worked
 table(kickSuccess$project_state)
