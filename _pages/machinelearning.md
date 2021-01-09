@@ -4,7 +4,7 @@ permalink: /data-wrangling/
 title: "Data Science Projects"
 author_profile: true
 header:
-  image: "/images/graphs3.jpg"
+  image: "/images/graphs2.jpg"
 ---
 
 
