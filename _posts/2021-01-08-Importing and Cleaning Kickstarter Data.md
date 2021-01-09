@@ -82,7 +82,8 @@ library(plyr)
 #UNZIPPING JSON FILES
 for(x in 2014:2015){
   mydir <- paste("D:/kickstarter/json_files14_15", x,sep="/")
-  zip_file <- list.files(path=mydir, pattern="*.zip", full.names=T)
+  zip_file <- list.files(path=mydir, pattern="*.zip", 
+                                    full.names=T)
   
   for(i in 1:length(zip_file)){
     dir.create(file.path(mydir, i))
