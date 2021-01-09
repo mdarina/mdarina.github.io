@@ -280,7 +280,9 @@ Unzipping and importing them manually meant making multiple errors on the way wi
 
 - Unzipping csv files was the same as for the JSON data (library(plyr)):
 
-I created two loops: the outer FOR-loop initiates an iteration for a specific year, the inner FOR-loop creates a folder for a specific month while the ldply function unzips files into that folder. After the inner loop is done with all the months in that year, it goes to the next year. FOR-loops I created had to be flexible because the year of 2015 had 2 month, the year of 2016 - 11, while 2017-2020 had 12 months which made it impossible to define a fixed range for the inner loop. To resolve the issue, I created a list of all zip files per year, the number of elements in which corresponded to the number of months in a specific year. Instead of specifying the maximum of the range, I used the length() function. It just returns a value that represents a number of elements in a list. It allowed me make the loop flexible since the maximum value of range always depended on the number of zip files in the list. The code with comments is presented below.
+I created two loops: the outer FOR-loop initiates an iteration for a specific year, the inner FOR-loop creates a folder for a specific month while the ldply function unzips files into that folder. After the inner loop is done with all the months in that year, it goes to the next year. FOR-loops I created had to be flexible because the year of 2015 had 2 month, the year of 2016 - 11, while 2017-2020 had 12 months which made it impossible to define a fixed range for the inner loop. 
+
+To resolve the issue, I created a list of all zip files per year, the number of elements in which corresponded to the number of months in a specific year. Instead of specifying the maximum of the range, I used the length() function. It just returns a value that represents a number of elements in a list. It allowed me make the loop flexible since the maximum value of range always depended on the number of zip files in the list. The code with comments is presented below.
 
 ```r
 #Importing the library
@@ -411,6 +413,7 @@ Some cells contained loads of data, some of which can be useful and can provide 
 - profile, from which project state (active/inactive) could be gotten
 
 I discarded the idea of splitting the columns by a specific separator because the process took a long time and was inefficient. I decided to retrieve data from the strings into specific variables right away. At the beginning, to each string I applied the sub() function to delete all the text before and including a specific word to make sure that the data I wanted to extract would be in the first position. Then I applied the str_extract() function from the stringr package to extract a specific value. 
+
 For instance, for the category names I deleted all the preceding text including "slug" and gave str_extract() an instruction to retrieve all alphanumeric values with spaces and &: "[[:alnum:]\\s&]+". The '+' sign allowed for flexibility as the number of characters to extract varied. To get the creator id, I deleted everything preceding and including the word "id" and then retreived only digits by using str_extract() and the regular expression "\\d+" as an argument.
 Here is an extract of the code for the new variables that I created based on the two columns described above.
 ```r
