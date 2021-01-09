@@ -430,11 +430,11 @@ Some projects lasted for months and thus, they would be found in different month
 
 1) Generate a date that would correspond to the month and year when the set was scraped like in the example below. The date_month variable was described above. Its value comes from the date portion of the zip archive's name.
 ```r
-#The year is generated in the outer loop and 
-#the date_month is retreived 
-#from the month's value from the zip file name as described above
-
-kickstart$dateScraped <- as.Date(paste(year, date_month, 01, sep="-"))
+#The year is generated in the outer loop and the date_month 
+#is retreived from the month's value from 
+#the zip file name as described above
+kickstart$dateScraped <- as.Date(paste(year, date_month, 01, 
+                                                    sep="-"))
 ```
 
 2) Merge all sets into a master set.
@@ -443,8 +443,9 @@ kickstart$dateScraped <- as.Date(paste(year, date_month, 01, sep="-"))
 mydir <- "D:/kickstarter"
 
 #Merging all the files
-kickstarter2014_2020 <- do.call(rbind, lapply(list.files(path = mydir,
-                            pattern="*.csv", full.names=T), read.csv))
+kickstarter2014_2020 <- do.call(rbind, 
+        lapply(list.files(path = mydir, pattern="*.csv",
+                               full.names=T), read.csv))
 ```
 
 3) Sort the id column in any order and sort the dateScraped in the descending order.
@@ -454,7 +455,7 @@ kickstarter2014_2020$dateScraped <- as.Date(kickstarter2014_2020$dateScraped)
 
 #Sorting the set by projectId and date
 newSet  <- kickstarter2014_2020[order(kickstarter2014_2020$id, 
-              kickstarter2014_2020$dateScraped, decreasing = TRUE),]
+        kickstarter2014_2020$dateScraped, decreasing = TRUE),]
 ```
 <center>
 <img src="/images/project_duplicates.PNG" >
@@ -502,7 +503,8 @@ names(currency)[1] <- "date"
 #Pivoting the currency table to get 
 #the column names into the column levels
 currency_pivot <- currency %>% pivot_longer(-date, 
-            names_to="currency", values_to="rate", values_drop_na=TRUE)
+            names_to="currency", values_to="rate", 
+                              values_drop_na=TRUE)
 ```
 
 - Create a date column so that each month begins on the first day, i.e. 2009-01-12, etc.
