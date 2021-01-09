@@ -65,7 +65,7 @@ Later I created additional variables:
 - pledgedPerBacker (pledged_USD/backers_count)
 
 ### **How was the Data Imported?**
-I applied the following procedure: Unzip all files -> Import the data into R -> Bind all files for one month together (needed for csv files) -> Create a csv file for the appropriate month and year on the computer harddrive -> Once all the months have been recorded on the harddrive, bind them together to create a master file for all years -> Delete all duplicate rows -> Create a master csv file for further reference and analysis. 
+I applied the following procedure: Unzip all files -> Import the data into R -> Bind all files for one month together (needed for csv files) -> Create a csv file for the appropriate month and year on the computer hard drive -> Once all the months have been recorded on the hard drive, bind them together to create a master file for all years -> Delete all duplicate rows -> Create a master csv file for further reference and analysis. 
 
 [Webrobots](https://webrobots.io/kickstarter-datasets/) store their data in a zipped format on their site. Each JSON object folder contains only one file, but each zipped folder with csv files has multiple csv files (30+) that need to be appended to represent a month of data. This makes manual data importing an impossible task also prone to multiple errors. Given different formats of the data, data reading had to be approached differently for JSON and csv files. 
 
@@ -74,7 +74,6 @@ I applied the following procedure: Unzip all files -> Import the data into R -> 
 
 ### **How were JSON Files Imported?**
 The 2015 October archive file had the .gz extension. I had to save it to zip so that all files had the same extension. Then everything was ready for the data import. At first I created a loop to unzip all the JSON data archives:
-
 ```r
 #Importing the library
 library(plyr)
@@ -100,7 +99,7 @@ In total 8 JSON sets were imported:
 - 2014: April, August, October, December
 - 2015: April, June, August, October
 
-It was really easy to import all 2014 and April 2015 JSON files because all the files' structure was the same and there was nothing in the data that had to be fixed. For 2014 I created a loop to read all 2014 files and create monthly csv files on the harddrive. The full code is available in [my GitHub repository](https://github.com/mdarina/kickstarter_data_cleaning).
+It was really easy to import all 2014 and April 2015 JSON files because all the files' structure was the same and there was nothing in the data that had to be fixed. For 2014 I created a loop to read all 2014 files and create monthly csv files on the hard drive. The full code is available in [my GitHub repository](https://github.com/mdarina/kickstarter_data_cleaning).
 ```r
 #Importing the libraries
 library(jsonlite) #to read JSON
@@ -108,7 +107,8 @@ library(tidyr) #to unnest JSON and turn into a rectangular format
 library(stringr) #to work with strings 
 year <- 2014
 mydir <- paste("D:/kickstarter/json_files14_15",year,sep="/")
-zip_file <- list.files(path=mydir, pattern="*.zip", full.names=T)
+zip_file <- list.files(path=mydir, pattern="*.zip", 
+                                        full.names=T)
 for(x in 1:length(zip_file)){
 mydir <- paste("D:/kickstarter/json_files14_15",year, x,sep="/")
 setwd(mydir)
@@ -117,31 +117,36 @@ setwd(mydir)
 date_month <- substr(sub(".*/","",zip_file[x]), 18,19)
 
 #getting the file name
-file <- sub(".*/","",list.files(path = mydir, pattern="*.json", full.names=T))
+file <- sub(".*/","",list.files(path = mydir, pattern="*.json", 
+                                        full.names=T))
   
 #reading the JSON file
 one <- fromJSON('Kickstarter_Kickstarter.json', simplifyVector = FALSE)
   
 #unnesting lists (tidyr library)
-kick <- tibble(data=one) %>% unnest_wider(data) %>% unnest_longer(projects) %>% unnest_wider(projects)
+kick <- tibble(data=one) %>% unnest_wider(data) %>% 
+        unnest_longer(projects) %>% unnest_wider(projects)
   
 #extracting and renaming creator id
 creator <- tibble(creator = kick$creator) %>% unnest_wider(creator)
 creatorId = as.data.frame(creator$id)
 kick$creatorId <-  creatorId$`creator$id`
   
-#renaming variable state to condition (because I would like the variable state to represent a location)
+#renaming variable state to condition (because I would like 
+#the variable state to represent a location)
 names(kick)[names(kick) == "state"] <- "condition"
   
 #extracting location data
-localization <- tibble(localization = kick$location) %>% unnest_wider(localization)
+localization <- tibble(localization = kick$location) %>% 
+                              unnest_wider(localization)
 city = as.data.frame(localization$name)
 kick$city <- city$`localization$name`
 region <- as.data.frame(localization$state)
 kick$region = region$`localization$state`
   
 #extracting categories and subcategories
-cat <- tibble(category=kick$category) %>% unnest_wider(category)
+cat <- tibble(category=kick$category) %>%  
+                              unnest_wider(category)
 subcat <- as.data.frame(cat$name)
 kick$subcategoryName <- subcat$`cat$name`
   
