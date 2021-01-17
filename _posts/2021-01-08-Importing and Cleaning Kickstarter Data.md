@@ -1,5 +1,5 @@
 ---
-title: 'Importing and Cleaning Kickstarter Data'
+title: 'Importing and Cleaning Kickstarter Data with R'
 author: "Dariia Dziuba"
 date: January 8, 2021
 output: 
