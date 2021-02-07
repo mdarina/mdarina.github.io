@@ -652,6 +652,47 @@ As we can see the adjusted forecast is too close to the lower boundary of the co
 3) The forecast should be rerun as soon as new data becomes available to adjust for the constantly changing conditions.
 
 
+
+
+### **Update**
+BIXI made their 2020 data available and it showed that even the downward adjusted forecast was too optimistic! Pretty much, after the adjustment, I should have just halved the number of rides given in the forecast.
+
+```r
+#Importing the 2020 file
+bixi2020 <- read.csv("OD_2020.csv")
+bi20 <- bixi2020[!bixi2020$duration_sec<300,]
+
+#Creating a new date
+class(bi20$start_date)
+bi20$start_date <- as.Date(bi20$start_date)
+bi20$Month <- make_date(year(bi20$start_date), month(bi20$start_date),1)
+
+#Counting rides per month
+bi20 %>% group_by(Month) %>% count()
+```
+
+These are the actual values that I placed near the forecasted ones:
+
+```
+##    Period   Forecast    Adj_FC  Actual
+## 2020-04-01  276057.2  235115.8  60574
+## 2020-05-01  913586.4  778094.7  332185
+## 2020-06-01 1040052.3  885804.7  478694
+## 2020-07-01 1175116.0 1000837.4  557252
+## 2020-08-01 1137016.2  968388.1  521514
+## 2020-09-01  975976.7  831232.0  447204
+## 2020-10-01  655910.0  558633.6  280374
+## 2020-11-01  202177.9  172193.4  118959
+```
+
+Such a huge difference between the number of actual and forecasted rides is interesting. First of all, it shows by how much the habits changed in the COVID-19 year. Riding BIXIs was pretty common in the previous years, but in 2020, definitely, it was not so. Mainly, of course, because there were not so many places where people could ride. In addition, there could have been a way fewer tourists than estimated. Most of the rides were done by non-members the majority of who may be tourists. Thus, we can asssume that the drop in tourism was huge, which, definitely, hurt BIXI's bottom line even though they claim that 2020 was a profitable year for them.
+
+The actual data show the same pattern - the number of BIXI rides dropped almost twice to the previous year - as we can see in the graph! It is not really surprising why even the adjusted forecasts were overly optimistic!  
+
+<img src="/2020-08-16-Forecasting-2020-BIXI-Rides_files/figure-html/unnamed-chunk-46-1.png" >
+
+Hopefully, BIXI will start a gradual recovery from the plunge in 2021!
+
 ### **Sources**
 1. [BIXI Montreal](https://www.bixi.com/en/open-data)
 
